@@ -26,6 +26,7 @@ export class UsersService {
       return this.userRepository.createUser(createUserDto, UserRole.ADMIN);
     }
   }
+
   async findUserById(userId: string): Promise<User> {
     const user = await this.userRepository.findOne(userId, {
       select: ['email', 'name', 'role', 'id'],
@@ -52,6 +53,7 @@ export class UsersService {
       );
     }
   }
+
   async deleteUser(userId: string) {
     const result = await this.userRepository.delete({ id: userId });
     if (result.affected === 0) {
@@ -60,6 +62,7 @@ export class UsersService {
       );
     }
   }
+
   async findUsers(
     queryDto: FindUsersQueryDto,
   ): Promise<{ users: User[]; total: number }> {

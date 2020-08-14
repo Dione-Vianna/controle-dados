@@ -5,11 +5,11 @@ import {
   ValidationPipe,
   UseGuards,
   Get,
-  Delete,
   Param,
   Patch,
-  Query,
   ForbiddenException,
+  Delete,
+  Query,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
@@ -39,6 +39,7 @@ export class UsersController {
       message: 'Administrador cadastrado com sucesso',
     };
   }
+
   @Get(':id')
   @Role(UserRole.ADMIN)
   async findUserById(@Param('id') id): Promise<ReturnUserDto> {
@@ -48,6 +49,7 @@ export class UsersController {
       message: 'Usuário encontrado',
     };
   }
+
   @Patch(':id')
   async updateUser(
     @Body(ValidationPipe) updateUserDto: UpdateUserDto,
@@ -71,6 +73,7 @@ export class UsersController {
       message: 'Usuário removido com sucesso',
     };
   }
+
   @Get()
   @Role(UserRole.ADMIN)
   async findUsers(@Query() query: FindUsersQueryDto) {
